@@ -74,6 +74,8 @@ This integration will turn Goose into a launchpad for real-world, autonomous sys
 - **Production-ready scheduling** with APScheduler backend
 - **Memory persistence** across background agent executions
 - **Tool orchestration** in autonomous environments
+- **Event-driven architecture** with pluggable event backends
+- **📅 Future Enhancements**: RabbitMQ, Kafka, Redis pub/sub, webhook integration
 
 ### 🧠 Advanced Memory Management
 - **Multi-tier memory system**: Working, episodic, and long-term memory
@@ -85,13 +87,21 @@ This integration will turn Goose into a launchpad for real-world, autonomous sys
 - **Cross-session memory persistence** for continuous learning
 
 ### 🔄 Event-Driven Architecture
-- **Real-time event streaming** with Redis Streams, InMemory
+- **Real-time event streaming** with current backends:
+  - **In-memory** ✅ BUILT - Development and testing
+  - **Redis Streams** ✅ BUILT - High-performance event streaming
+- **📅 Future Event Backends** (Planned):
+  - **RabbitMQ** 📅 PLANNED - Enterprise message queuing
+  - **Kafka** 📅 PLANNED - Distributed event streaming
+  - **Redis pub/sub** 📅 PLANNED - Lightweight real-time messaging
+  - **Webhooks** 📅 PLANNED - External system notifications
 - **Comprehensive event types**: User messages, tool calls, errors, final answers
 - **Background agent events**: Task started, completed, error, status updates
-- **Pluggable event backends**: In-memory, Redis, SQL
+- **Pluggable event backends**: Easy switching between different event systems
 - **Event-driven memory processing** and background tasks
 - **Real-time monitoring and analytics**
 - **Event replay and debugging capabilities**
+- **Cross-platform event synchronization**
 
 ### 🛠️ Universal Tool Orchestration
 - **Enhanced MCP server integration**: Extends Goose's existing MCP capabilities
@@ -161,9 +171,11 @@ For now, you can use OmniAgent directly while we work on the Goose integration:
 ```python
 from mcpomni_connect.omni_agent import OmniAgent
 from mcpomni_connect.memory_store.memory_router import MemoryRouter
+from mcpomni_connect.events.event_router import EventRouter
 
 # Initialize memory store
 memory_store = MemoryRouter(memory_store_type="redis")  # or "postgresql", "sqlite", "mysql"
+event_router = EventRouter(event_store_type="in_memory")
 
 # Create OmniAgent
 agent = OmniAgent(
@@ -183,6 +195,7 @@ agent = OmniAgent(
         }
     ],
     memory_store=memory_store,
+   event_router=event_router
 )
 
 # Run the agent
@@ -376,7 +389,14 @@ goose-omniagent-core Bridge (Python) 📅 TO BE BUILT
 OmniAgent Core ✅ BUILT
     ├── Memory Router (Redis/PostgreSQL/SQLite/MySQL) ✅ BUILT
     ├── Tool Orchestrator (MCP + Local Tools) ✅ BUILT
-    ├── Event System (Redis Streams/InMemory) ✅ BUILT
+    ├── Event System (Current) ✅ BUILT
+    │   ├── In-memory ✅ BUILT
+    │   └── Redis Streams ✅ BUILT
+    ├── Event System (Future) 📅 PLANNED
+    │   ├── RabbitMQ 📅 PLANNED
+    │   ├── Kafka 📅 PLANNED
+    │   ├── Redis pub/sub 📅 PLANNED
+    │   └── Webhooks 📅 PLANNED
     ├── Vector Database (Qdrant) ✅ BUILT
     ├── LLM Integration (LiteLLM) ✅ BUILT
     └── Background Agent Manager (Self-Flying Agents) ✅ BUILT
@@ -387,7 +407,14 @@ OmniAgent Core ✅ BUILT
 Background Agent Manager ✅ BUILT
     ├── Task Registry (Dynamic Task Management) ✅ BUILT
     ├── Scheduler Backend (APScheduler) ✅ BUILT
-    ├── Event Router (Real-time Monitoring) ✅ BUILT
+    ├── Event Router (Current) ✅ BUILT
+    │   ├── In-memory ✅ BUILT
+    │   └── Redis Streams ✅ BUILT
+    ├── Event Router (Future) 📅 PLANNED
+    │   ├── RabbitMQ 📅 PLANNED
+    │   ├── Kafka 📅 PLANNED
+    │   ├── Redis pub/sub 📅 PLANNED
+    │   └── Webhooks 📅 PLANNED
     ├── Memory Router (Persistent Memory) ✅ BUILT
     └── Agent Orchestrator (Multi-Agent Coordination) ✅ BUILT
 ```
